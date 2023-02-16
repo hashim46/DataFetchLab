@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { getStarShip } from './services/sw-api'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  let url = "https://swapi.dev/api/starships"
+
+  let [starShip, setStarShip]= useState([])
+
+  useEffect(()=> {fetchHandle()} , [])
+
+//let starShipName = starShip.map((obj, index)=> <p key = {index} >{obj.name}</p>)
+
+async function fetchHandle(){
+  let data = await getStarShip(url)
+  let starShipName = data.results.map((item, index)=> <li className = "cards" key = {index} >{item.name}</li>)
+  setStarShip(starShipName)
 }
 
+console.log(starShip)
+
+  return (
+    <div className="App">
+      <ul className="ul">
+      {starShip}
+      </ul>
+    </div>
+  );
+
+  }
+
 export default App;
+
+
