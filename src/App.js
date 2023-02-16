@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { getStarShip } from './services/sw-api'
+import { getAllStarShips } from './services/sw-api'
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
 //let starShipName = starShip.map((obj, index)=> <p key = {index} >{obj.name}</p>)
 
 async function fetchHandle(){
-  let data = await getStarShip(url)
+  let data = await getAllStarShips(url)
   let starShipName = data.results.map((item, index)=> <li className = "cards" key = {index} >{item.name}</li>)
   setStarShip(starShipName)
 }
